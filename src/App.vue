@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <mt-header title="VUE">
+      <div slot="left">
+        <mt-button v-link="'/'" icon="back">返回</mt-button>
+      </div>
+      <mt-button icon="more" slot="right"></mt-button>
+    </mt-header>
     <router-view></router-view>
   </div>
 </template>
@@ -12,12 +17,5 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
