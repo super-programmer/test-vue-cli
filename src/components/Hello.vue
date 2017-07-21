@@ -5,10 +5,10 @@
       <h3 class="tit">SUPER-BLOG</h3>
       <section class="item">
         <label class="item-tit">
-          手机号
+          手机号 {{phoneNum}}
         </label>
         <div class="con">
-          <input type="text">
+          <input type="text"  v-model="phoneNum" placeholder="phoneNum">
         </div>
       </section>
       <section class="item">
@@ -16,11 +16,11 @@
           密码
         </label>
         <div class="con">
-          <input type="text">
+          <input type="text" v-model="password" placeholder="password">
         </div>
       </section>
       <section class="b-buttons">
-        <input type="button" value="注册" class="u-btn">
+        <input type="button" value="注册" class="u-btn" @click="add">
       </section>
     </article>
   </div>
@@ -30,7 +30,14 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      phoneNum: this.$store.state.userSign.phoneNum,
+      password: this.$store.state.userSign.password
+    }
+  },
+  methods: {
+    add: function () {
+      this.$store.dispatch('saveForm')
     }
   }
 }

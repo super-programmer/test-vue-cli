@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <mt-header title="VUE">
+    <mt-header title="sign-up">
       <div slot="left">
         <mt-button v-link="'/'" icon="back">返回</mt-button>
       </div>
