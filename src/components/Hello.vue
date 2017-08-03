@@ -5,7 +5,7 @@
       <h3 class="tit">SUPER-BLOG</h3>
       <section class="item">
         <label class="item-tit">
-          手机号 {{phoneNum}}
+          手机号 {{phoneNum1}}
         </label>
         <div class="con">
           <input type="text"  v-model="phoneNum" placeholder="phoneNum">
@@ -25,21 +25,35 @@
     </article>
   </div>
 </template>
-<script>
+<script type="es6">
+  import { mapState } from 'vuex'
 export default {
   name: 'hello',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      phoneNum: this.$store.state.userSign.phoneNum,
-      password: this.$store.state.userSign.password
+      phoneNum: 133,
+      password: '123456'
     }
   },
   methods: {
     add: function () {
-      this.$store.dispatch('saveForm')
+        var useObj={
+            phoneNum: this.phoneNum,
+            password: this.password
+        };
+//      this.phoneNum = this.$store.userSign.phoneNum
+      this.$store.commit({
+        type:'update',
+        useObj:useObj
+      });
+      this.$store.dispatch('saveForm');
     }
-  }
+  },
+  computed: mapState({
+    phoneNum1: state => state.userSign.phoneNum
+  })
+
 }
 </script>
 
