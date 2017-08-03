@@ -5,11 +5,12 @@
       <h3 class="tit">SUPER-BLOG</h3>
       <section class="item">
         <label class="item-tit">
-          手机号 {{phoneNum1}}
+          手机号
         </label>
         <div class="con">
           <input type="text"  v-model="phoneNum" placeholder="phoneNum">
         </div>
+        {{usePhoneNum}}
       </section>
       <section class="item">
         <label class="item-tit">
@@ -18,6 +19,7 @@
         <div class="con">
           <input type="text" v-model="password" placeholder="password">
         </div>
+        {{usePassword}}
       </section>
       <section class="b-buttons">
         <input type="button" value="注册" class="u-btn" @click="add">
@@ -51,7 +53,8 @@ export default {
     }
   },
   computed: mapState({
-    phoneNum1: state => state.userSign.phoneNum
+    usePhoneNum: state => state.userSign.phoneNum,
+    usePassword: state => state.userSign.password
   })
 
 }
