@@ -20,12 +20,16 @@ export default new Vuex.Store({
     userState: {
       come: 'true'
     },
-    num: 1
+    num: 1,
+    signSucess: false
   },
   mutations: {
     update (state, userSign) {
       // 变更状态
       state.userSign = userSign.useObj
+    },
+    upSucessSate (state, signSucess) {
+      state.signSucess = signSucess.signSucess
     }
   },
   actions: {
@@ -35,7 +39,18 @@ export default new Vuex.Store({
         params: {
           data: context.state.userSign
         }
+      }).then(function (response) {
+        context.commit({
+          type: 'upSucessSate',
+          signSucess: true
+        });
+      }).catch(function (error) {
+        context.commit({
+          type: 'upSucessSate',
+          signSucess: false
+        });
       })
+
     }
   }
 })

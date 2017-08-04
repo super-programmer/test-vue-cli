@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'
 import store from './store'
+import Vuerify from 'vuerify'
+
+Vue.use(Vuerify)
 Vue.use(MintUI)
 Vue.config.productionTip = false
 
