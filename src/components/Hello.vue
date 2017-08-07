@@ -73,12 +73,20 @@
           password: this.password
         };
         if(this.$vuerify.check()){
-          this.$store.commit({
+          this.$store.dispatch({
             type: 'update',
             useObj: useObj
           });
           this.$store.dispatch('saveForm');
         }
+      },
+      login: function () {
+        this.$store.dispatch({
+          type: 'update',
+          obj: {
+            name: 'ssss'
+          }
+        });
       },
       toast: function () {
         if(this.signSucess){

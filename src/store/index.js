@@ -24,15 +24,21 @@ export default new Vuex.Store({
     signSucess: false
   },
   mutations: {
-    update (state, userSign) {
-      // 变更状态
-      state.userSign = userSign.useObj
-    },
     upSucessSate (state, signSucess) {
       state.signSucess = signSucess.signSucess
+    },
+    update (state, userSign) {
+      // 变更状态
+      state.userSign = userSign.obj.useObj
     }
   },
   actions: {
+    update (context, obj) {
+      context.commit({
+        type: 'update',
+        obj: obj
+      })
+    },
     // 封装一个 ajax 方法
     saveForm (context) {
       axios.get('http://localhost:3000/login', {
@@ -43,14 +49,11 @@ export default new Vuex.Store({
         context.commit({
           type: 'upSucessSate',
           signSucess: true
-        });
+        })
+        console.log(response)
       }).catch(function (error) {
-        context.commit({
-          type: 'upSucessSate',
-          signSucess: false
-        });
+        console.log(error)
       })
-
     }
   }
 })
