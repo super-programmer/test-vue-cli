@@ -1,11 +1,5 @@
 <template>
   <div id="app">
-    <mt-header title="sign-up">
-      <div slot="left">
-        <mt-button v-link="'/'" icon="back">返回</mt-button>
-      </div>
-      <mt-button icon="more" slot="right"></mt-button>
-    </mt-header>
     <router-view></router-view>
   </div>
 </template>
@@ -13,9 +7,9 @@
 export default {
   name: 'app'
 }
-
 </script>
-
 <style>
-
+  @media screen and (min-width: 1280px){
+    .index-header{display:none;}
+  }
 </style>

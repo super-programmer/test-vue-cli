@@ -1,6 +1,12 @@
 <template>
   <div class="hello">
     <div class="bg"></div>
+      <mt-header title="sign-up" class="index-header">
+        <div slot="left">
+          <mt-button>关闭</mt-button>
+        </div>
+        <mt-button icon="more" slot="right"></mt-button>
+      </mt-header>
     <article class="info">
       <h3 class="tit">SUPER-BLOG</h3>
       <section class="item">
@@ -17,14 +23,13 @@
         </label>
         <div class="con">
           <input type="text" v-model="password" placeholder="password">
-          <ul><li v-for="err in errors" v-text="err">{{errors}}</li></ul>
+          <ul><li v-for="err in errors" v-text="err" >{{err}}</li></ul>
         </div>
       </section>
       <section class="b-buttons">
         <input type="button" value="登录" class="u-btn" @click="login">
         <input type="button" value="注册" class="u-btn" @click="sign">
       </section>
-      <section class="success-cover" v-if="signSucess"></section>
     </article>
   </div>
 </template>
@@ -77,16 +82,23 @@
             type: 'update',
             useObj: useObj
           });
+          this.$store.dispatch('resetState');
           this.$store.dispatch('saveForm');
         }
       },
       login: function () {
-        this.$store.dispatch({
-          type: 'update',
-          obj: {
-            name: 'ssss'
-          }
-        });
+        var useObj = {
+          phoneNum: this.phoneNum,
+          password: this.password
+        };
+        if(this.$vuerify.check()){
+          this.$store.dispatch({
+            type: 'update',
+            useObj: useObj
+          });
+          this.$store.dispatch('resetState');
+          this.$store.dispatch('login');
+        }
       },
       toast: function () {
         if(this.signSucess){
@@ -94,12 +106,26 @@
         }else{
           Toast('注册失败');
         }
+      },
+      toastState: function() {
+        switch (this.useLoginState) {
+          case 200 : this.$router.push('/home')
+            break;
+          case 201 : Toast('手机号码已注册！')
+            break;
+          case 203 : Toast('手机号码未注册！')
+            break;
+          case 400 : Toast('密码错误！')
+            break;
+        }
+
       }
     },
     computed: mapState({
       ...mapState({
         usePhoneNum: state => state.userSign.phoneNum,
         usePassword: state => state.userSign.password,
+        useLoginState: state => state.userState.state,
         signSucess: state => state.signSucess
       }),
       errors (){
@@ -107,7 +133,8 @@
       }
     }),
     watch: {
-      'signSucess': 'toast'
+      'signSucess': 'toast',
+      'useLoginState': 'toastState'
     }
 
   }
@@ -115,6 +142,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
   .bg{position:fixed;top:0;left:0;bottom:0;width:100%;background:url('../assets/bg.png') no-repeat center;background-size:cover;z-index:-1;}
   .info{position:absolute;top:50%;left:50%;margin:-200px 0 0 -150px;width:300px;height:400px;background:#8babd7;border-radius:10px;color:#fff;}
   .info .tit{margin:20px 0;text-align:center;font-size:22px;}
@@ -122,5 +150,4 @@
   .info .item .item-tit{float:left;width:60px;}
   .info .b-buttons{text-align:center;}
   .info .b-buttons .u-btn{width:60px;height:30px;line-height:30px;margin:0 20px;text-align:center;background:#00d6b2;color:#fff;border:none;}
-  .success-cover{position:absolute;left:0;top:0;height:100%;width:100%;background:rgba(0,0,0,0.4);border-radius:10px;}
 </style>
