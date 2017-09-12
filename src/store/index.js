@@ -4,7 +4,6 @@
 // store.js
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 // 引入 axios
 import axios from 'axios'
 
@@ -14,14 +13,15 @@ export default new Vuex.Store({
   // 定义状态
   state: {
     userSign: {
-      phoneNum: '12312345678',
+      phoneNum: '15538308935',
       password: '12345'
     },
     userState: {
       state: '100'
     },
     num: 1,
-    signSucess: false
+    signSucess: true,
+    blogDetail: ''
   },
   mutations: {
     upSucessSate (state, signSucess) {
@@ -31,11 +31,13 @@ export default new Vuex.Store({
       state.userState.state = UseSucess.state
     },
     update (state, userSign) {
-      // 变更状态
       state.userSign = userSign.obj.useObj
     },
     resetState (state) {
       state.userState.state = '100'
+    },
+    updateblog (state, data) {
+      state.blogDetail = data.detail.obj
     }
   },
   actions: {
@@ -93,6 +95,24 @@ export default new Vuex.Store({
             state: 203
           })
         }
+        console.log(response)
+      }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    updateblog (context, detail) {
+      context.commit({
+        type: 'updateblog',
+        detail: detail
+      })
+    },
+    upload (context) {
+      axios.post('http://localhost:3000/upload', {
+        params: {
+          uid: context.state.userSign,
+          data: context.state.blogDetail
+        }
+      }).then(function (response) {
         console.log(response)
       }).catch(function (error) {
         console.log(error)

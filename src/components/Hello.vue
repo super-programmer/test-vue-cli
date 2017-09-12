@@ -15,6 +15,7 @@
         </label>
         <div class="con">
           <input type="text"  v-model="phoneNum" placeholder="phoneNum">
+          <p v-if="errors.phoneNum">{{errors.phoneNum}}</p>
         </div>
       </section>
       <section class="item">
@@ -23,7 +24,7 @@
         </label>
         <div class="con">
           <input type="text" v-model="password" placeholder="password">
-          <ul><li v-for="err in errors" v-text="err" >{{err}}</li></ul>
+          <p v-if="errors.password">{{errors.password}}</p>
         </div>
       </section>
       <section class="b-buttons">
@@ -36,13 +37,14 @@
 <script type="es6">
   import { mapState } from 'vuex'
   import { Toast } from 'mint-ui'
+  import { mystorage } from '../common/storage'
   export default {
     name: 'hello',
     data () {
       return {
         msg: 'Welcome to Your Vue.js App',
         phoneNum: 133,
-        password: '123456'
+        password: '123456',
       }
     },
     vuerify: {
@@ -110,6 +112,7 @@
       toastState: function() {
         switch (this.useLoginState) {
           case 200 : this.$router.push('/home')
+            mystorage.set('phoneNum', this.phoneNum)
             break;
           case 201 : Toast('手机号码已注册！')
             break;
@@ -118,8 +121,7 @@
           case 400 : Toast('密码错误！')
             break;
         }
-
-      }
+      },
     },
     computed: mapState({
       ...mapState({
@@ -134,7 +136,7 @@
     }),
     watch: {
       'signSucess': 'toast',
-      'useLoginState': 'toastState'
+      'useLoginState': 'toastState',
     }
 
   }

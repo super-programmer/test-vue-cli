@@ -6,8 +6,11 @@ import router from './router'
 import MintUI from 'mint-ui'
 import store from './store'
 import Vuerify from 'vuerify'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 Vue.use(Vuerify)
+Vue.use(mavonEditor)
 Vue.use(MintUI)
 Vue.config.productionTip = false
 
