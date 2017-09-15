@@ -13,8 +13,8 @@ export default new Vuex.Store({
   // 定义状态
   state: {
     userSign: {
-      phoneNum: '15538308935',
-      password: '12345'
+      phoneNum: '',
+      password: ''
     },
     userState: {
       state: '100'

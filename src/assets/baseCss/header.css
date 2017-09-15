@@ -1,0 +1,9 @@
+.c-header{position:fixed;top:0;left:0;width:100%;height:80px;background:#ccc;border-bottom:1px solid #999;box-shadow:0px 2px 10px #000;}
+.c-header .m-center{position:relative;width:1200px;margin:0 auto;line-height:80px;font-size:16px;color:#333;text-align:center;overflow:hidden;}
+.c-header .m-center .m-arrow{position:absolute;display:block;width:120px;height:80px;background:red;left:0;top:0;z-index:-1;}
+.c-header .m-center .m-move-arrow{transition:left 0.5s}
+.c-header .m-center .m-top-tabs{float:left;overflow:hidden;}
+.c-header .m-center .m-top-tabs .tab-item{float:left;width:120px;cursor:pointer;}
+.c-header .m-center .m-top-tabs .tab-item:hover,
+.c-header .m-center .m-top-tabs .tab-item-on{color:#fff;}
+.c-header .m-center .user-img{float:right;width:60px;height:60px;margin:10px 10px 0 0;border-radius:50%;border:1px solid #ececec;}

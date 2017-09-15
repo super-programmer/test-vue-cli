@@ -111,14 +111,19 @@
       },
       toastState: function() {
         switch (this.useLoginState) {
-          case 200 : this.$router.push('/home')
+          case 200 :
+            this.$router.push('/home')
             mystorage.set('phoneNum', this.phoneNum)
+            mystorage.set('password', this.password)
             break;
-          case 201 : Toast('手机号码已注册！')
+          case 201 :
+            Toast('手机号码已注册！')
             break;
-          case 203 : Toast('手机号码未注册！')
+          case 203 :
+            Toast('手机号码未注册！')
             break;
-          case 400 : Toast('密码错误！')
+          case 400 :
+            Toast('密码错误！')
             break;
         }
       },
@@ -143,13 +148,4 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-  .bg{position:fixed;top:0;left:0;bottom:0;width:100%;background:url('../assets/bg.png') no-repeat center;background-size:cover;z-index:-1;}
-  .info{position:absolute;top:50%;left:50%;margin:-200px 0 0 -150px;width:300px;height:400px;background:#8babd7;border-radius:10px;color:#fff;}
-  .info .tit{margin:20px 0;text-align:center;font-size:22px;}
-  .info .item{margin:20px 0;font-size:16px;overflow:hidden;font-weight:bold;padding:0 20px;}
-  .info .item .item-tit{float:left;width:60px;}
-  .info .b-buttons{text-align:center;}
-  .info .b-buttons .u-btn{width:60px;height:30px;line-height:30px;margin:0 20px;text-align:center;background:#00d6b2;color:#fff;border:none;}
-</style>
+<style scoped src="../assets/baseCss/login.css"></style>
